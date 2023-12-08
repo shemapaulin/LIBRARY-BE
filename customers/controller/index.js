@@ -19,14 +19,15 @@ const createCustomer=async(req,res)=>{
 const getCustomer=async(req,res)=>{
 try {
     const id=req.params.id;
-    const getCustomer=await customer.findById(id);
+    const getCustomer=await customer.findOne({ _id: id });
+
 if(getCustomer){
     res.status(200).json({
-        result: getCustomer,
+        result: getCustomer.names,
         
     })
 }else{
-    res.status(404).send("could not workout still");
+    res.status(405).send("could not workout still");
 }
 
 } catch (error) {

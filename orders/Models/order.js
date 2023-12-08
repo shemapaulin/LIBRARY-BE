@@ -2,21 +2,21 @@ import mongoose from "mongoose";
 
 const orderSchema = new mongoose.Schema({
     CustomerId:{
-        type: mongoose.SchemaTypes.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref:"customer",
         require:true
     },
     BookId:{
-        type: mongoose.SchemaTypes.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref:"book",
         require:true  
     },
     InitialDate:{
-        type: Date,
+        type: String,
         require:true  
     },
     ReturnDate:{
-        type: Date,
+        type: String,
         require:true 
     }
 })

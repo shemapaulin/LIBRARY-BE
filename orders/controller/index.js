@@ -7,8 +7,8 @@ import axios from "axios";
 const createdOrder=async(req,res)=>{
     try {
         const inputOrders = {
-            CustomerId:new mongoose.Types.ObjectId(req.body.CustomerId),
-            BookId: new mongoose.Types.ObjectId(req.body.BookId),
+            CustomerId:req.body.CustomerId,
+            BookId: req.body.BookId,
             InitialDate: req.body.InitialDate,
             ReturnDate: req.body.ReturnDate
         }
@@ -42,33 +42,7 @@ const getOrders=async(req,res)=>{
     }
 }
 
-const getOrder = async (req, res) => {
-    try {
-      const id = req.params.id;
-  
-      const getOrder = await order.findById(id);
-  
-      if (getOrder) {
-        const customerResponse = await axios.get(`http://localhost:3001/getCustomer/${getOrder.CustomerId}`);
-        console.log(customerResponse.data);
-  
-       const bookResponse = await axios.get(`http://localhost:5757/getBook/${getOrder.BookId}`);
-        console.log(bookResponse);
-  return;
-        const objects = {
-          customerName: customerResponse.data.names,
-          bookTitle: bookResponse.data.Title
-        };
-  
-        res.status(200).send(objects);
-      } else {
-        res.status(404).send("invalid order");
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).send("Internal Server Error");
-    }
-  };
+
   
 const deleteOrder=async(req,res)=>{
     const popOrder=await order.findOneAndDelete(req.params.id)
@@ -78,4 +52,4 @@ const deleteOrder=async(req,res)=>{
         res.status(404).send("you have failed to delete order!")
     }
 }
-export {createdOrder,getOrders,getOrder,deleteOrder}
+export {createdOrder,getOrders,deleteOrder}

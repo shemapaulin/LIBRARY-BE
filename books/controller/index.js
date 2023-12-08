@@ -22,7 +22,7 @@ const getBook=async(req,res)=>{
         const oneBook=await book.findById(id);
         if(oneBook){
             res.status(200).json({
-               result: oneBook,
+               result: oneBook.Title,
                 message : `book retrieved `,
 
 
